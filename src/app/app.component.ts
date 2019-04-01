@@ -14,7 +14,7 @@ export class AppComponent {
   title = "oshop";
   items: Observable<any[]>;
   constructor(private afAuth: AngularFireAuth) {}
-  login() {
-    this.afAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
-  }
+  // login() {
+  //   this.afAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
+  // }
 }
