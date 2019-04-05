@@ -1,9 +1,6 @@
+import { Router } from "@angular/router";
 import { Component } from "@angular/core";
-import { AngularFirestore } from "@angular/fire/firestore";
-import { Observable } from "rxjs";
-
-import * as firebase from "firebase";
-import { AngularFireAuth } from "@angular/fire/auth";
+import { AuthService } from "./auth.service";
 
 @Component({
   selector: "app-root",
@@ -12,9 +9,12 @@ import { AngularFireAuth } from "@angular/fire/auth";
 })
 export class AppComponent {
   title = "oshop";
-  items: Observable<any[]>;
-  constructor(private afAuth: AngularFireAuth) {}
-  // login() {
-  //   this.afAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
-  // }
+  constructor(private auth: AuthService, private route: Router) {
+    auth.user$.subscribe(user => {
+      if (user) {
+        let retunUrl = localStorage.getItem("returnUrl");
+        route.navigateByUrl(retunUrl);
+      }
+    });
+  }
 }

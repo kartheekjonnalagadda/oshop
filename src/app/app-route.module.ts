@@ -1,3 +1,5 @@
+import { AuthGuard } from "./auth-guard.service";
+import { AuthService } from "./auth.service";
 import { MyOrdersComponent } from "./my-orders/my-orders.component";
 import { AdminOrdersComponent } from "././admin/admin-orders/admin-orders.component";
 import { AdminProductsComponent } from "././admin/admin-products/admin-products.component";
@@ -18,13 +20,34 @@ import { RouterModule } from "@angular/router";
       { path: "", component: HomeComponent },
       { path: "products", component: ProductsComponent },
       { path: "shopping-cart", component: ShoppingCartComponent },
-      { path: "check-out", component: CheckOutComponent },
-      { path: "order-sucess", component: OrderSuccessComponent },
       { path: "login", component: LoginComponent },
-      { path: "my/orders", component: MyOrdersComponent },
 
-      { path: "admin/products", component: AdminProductsComponent },
-      { path: "admin/orders", component: AdminOrdersComponent }
+      {
+        path: "check-out",
+        component: CheckOutComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: "order-sucess",
+        component: OrderSuccessComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: "my/orders",
+        component: MyOrdersComponent,
+        canActivate: [AuthGuard]
+      },
+
+      {
+        path: "admin/products",
+        component: AdminProductsComponent,
+        canActivate: [AuthGuard]
+      },
+      {
+        path: "admin/orders",
+        component: AdminOrdersComponent,
+        canActivate: [AuthGuard]
+      }
     ])
   ],
   declarations: [],
