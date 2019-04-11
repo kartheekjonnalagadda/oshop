@@ -1,4 +1,6 @@
-import { AuthGuard as AuthGuard } from "./auth-guard.service";
+import { AdminAuthGuard as AdminAuthGuard } from "./admin-auth-guard.service";
+import { UserService } from "./user.service";
+import { AuthGuard } from "./auth-guard.service";
 import { AppRouterModule } from "./app-route.module";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
@@ -20,7 +22,7 @@ import { AdminOrdersComponent } from "./admin/admin-orders/admin-orders.componen
 import { LoginComponent } from "./login/login.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AuthService } from "./auth.service";
-
+import { AngularFireDatabaseModule } from "@angular/fire/database";
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,9 +44,10 @@ import { AuthService } from "./auth.service";
     AngularFireAuthModule,
     AngularFireStorageModule,
     AppRouterModule,
+    AngularFireDatabaseModule,
     NgbModule.forRoot()
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, AuthGuard, UserService, AdminAuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

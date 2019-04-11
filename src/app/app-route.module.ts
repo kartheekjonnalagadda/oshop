@@ -12,6 +12,7 @@ import { ShoppingCartComponent } from "./shopping-cart/shopping-cart.component";
 import { OrderSuccessComponent } from "./order-success/order-success.component";
 import { CheckOutComponent } from "./check-out/check-out.component";
 import { RouterModule } from "@angular/router";
+import { AdminAuthGuard } from "./admin-auth-guard.service";
 
 @NgModule({
   imports: [
@@ -41,12 +42,12 @@ import { RouterModule } from "@angular/router";
       {
         path: "admin/products",
         component: AdminProductsComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard, AdminAuthGuard]
       },
       {
         path: "admin/orders",
         component: AdminOrdersComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard, AdminAuthGuard]
       }
     ])
   ],
